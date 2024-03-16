@@ -1,0 +1,41 @@
+{% extends "empty_page.html" %}
+
+{% block content %}
+
+<h1>Register a new book</h1>
+
+<form action="/books/new" method="post">
+
+    <div class="form-group">
+        <label for="book_name">Book name</label>
+        <input type="text" class="form-control" id="book_name"
+               name="name" placeholder="..." />
+    </div>
+
+    <div class="form-group">
+        <label for="book_author">Author(s)</label>
+        <input type="textarea" class="form-control" id="book_author"
+               name="author" />
+    </div>
+
+    <div class="form-group">
+        <label for="book_editor">Editor</label>
+        <input type="textarea" class="form-control" id="book_editor"
+               name="editor" />
+    </div>
+
+    <div class="form-group">
+        <label for="book_isdn13">ISDN-13</label>
+        <input type="textarea" class="form-control" id="book_isdn13"
+               name="isdn_13" />
+    </div>
+
+    <button type="submit" class="btn btn-success my-4">Register book</button>
+
+</form>
+
+<div>
+    <a class="btn btn-outline-dark mx-2" href="/books/all">Back</a>
+</div>
+
+{% endblock %}
