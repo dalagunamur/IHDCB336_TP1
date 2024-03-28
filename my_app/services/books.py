@@ -3,7 +3,7 @@ from my_app.database import database
 
 
 def save_book(new_book: Book) -> Book:
-    database["books"].append(new_book)
+    database["books"].append(new_book.model_dump())
     return new_book
 
 
