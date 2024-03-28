@@ -57,32 +57,3 @@ def create_new_book(name: Annotated[str, Form()], author: Annotated[str, Form()]
 def ask_to_remove_book(book_id: Annotated[str, Form()]):
     service.remove_book_by_id(book_id)
     return RedirectResponse(url="/books/all", status_code=302)
-
-
-@router.get('/update')
-def ask_to_create_new_book(request: Request):
-    return templates.TemplateResponse(
-        "new_book.html",
-        context={'request': request}
-    )
-
-
-@router.post('/update')
-def create_new_book(name: Annotated[str, Form()], author: Annotated[str, Form()], editor: Annotated[str, Form()], isdn_13: Annotated[str, Form()]):
-    new_book_data = {
-        "id": str(uuid4()),
-        "isdn_13": isdn_13,
-        "name": name,
-        "author": author,
-        "editor": editor,
-        "entry_date": date.today(),
-    }
-    try:
-        new_book = Book.model_validate(new_book_data)
-    except ValidationError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid name or description for the book.",
-        )
-    service.save_book(new_book)
-    return RedirectResponse(url="/books/all", status_code=302)
